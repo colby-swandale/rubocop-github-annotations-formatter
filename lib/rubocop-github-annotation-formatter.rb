@@ -5,7 +5,7 @@ require 'rubocop/formatter/base_formatter'
 
 module RubocopGithubAnnotationFormatter
   class AnnotationFormatter < RuboCop::Formatter::BaseFormatter
-    ANNOTATION_TEMPLATE = "::%<level>s file=%<file>s,line=%<line>d,col=%<col>d :: %<message>s\n"
+    ANNOTATION_TEMPLATE = "\n::%<level>s file=%<file>s,line=%<line>d,col=%<col>d :: %<message>s\n"
 
     def file_finished(file, offenses)
       return if offenses.empty?

@@ -21,17 +21,17 @@ class RubocopGithubAnnotationFormatterTest < Minitest::Test
 
   def test_warning_output
     @formatter.file_finished("test.rb", [offense_with_severity(:warning)])
-    assert_equal @output.string, "::warning file=test.rb,line=1,col=0 :: Example cop message\n"
+    assert_equal @output.string, "\n::warning file=test.rb,line=1,col=0 :: Example cop message\n"
   end
 
   def test_error_output
     @formatter.file_finished("test.rb", [offense_with_severity(:error)])
-    assert_equal @output.string, "::error file=test.rb,line=1,col=0 :: Example cop message\n"
+    assert_equal @output.string, "\n::error file=test.rb,line=1,col=0 :: Example cop message\n"
   end
 
   def test_info_output
     @formatter.file_finished("test.rb", [offense_with_severity(:convention)])
-    assert_equal @output.string, "::info file=test.rb,line=1,col=0 :: Example cop message\n"
+    assert_equal @output.string, "\n::info file=test.rb,line=1,col=0 :: Example cop message\n"
   end
 
   def test_multiple_warning_output
@@ -41,7 +41,9 @@ class RubocopGithubAnnotationFormatterTest < Minitest::Test
     ])
 
     assert_equal @output.string, <<~OUTPUT
+      
       ::warning file=test1.rb,line=1,col=0 :: Example cop message
+
       ::error file=test1.rb,line=2,col=0 :: Example cop message 2
     OUTPUT
   end
