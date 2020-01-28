@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-Note: Rubocop must be executed inside [Github Actions](https://github.com/features/actions) for Annotations to work, using a 3rd party CI service like Travis-CI or CircleCI won't work.
+**Note:** Rubocop must be executed inside [Github Actions](https://github.com/features/actions) for Annotations to work, using a 3rd party CI service like Travis-CI or CircleCI won't render any annotations.
 
 Append your `.rubocop.yml` file to load the formatter
 
@@ -31,11 +31,11 @@ require:
   - rubocop-github-annotation-formatter
 ```
 
-The append your CI scripts to run rubocop:
+Then append your CI scripts to run rubocop with:
 
     bundle exec rubocop --format RubocopGithubAnnotationFormatter::AnnotationFormatter
 
-You can also have multiple different sets of output to maintain your current setup
+You can have multiple different sets of output to maintain your current setup:
 
     bundle exec rubocop --format progress --format RubocopGithubAnnotationFormatter::AnnotationFormatter
 
