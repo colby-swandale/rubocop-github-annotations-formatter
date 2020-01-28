@@ -1,6 +1,8 @@
 # Github Annotation Rubocop Formatter
 
-This gem adds support for Github Annotations to Rubocop.
+This gem adds support for rendering Rubocop errors into Github Annotations.
+
+![example github annotation](https://raw.githubusercontent.com/colby-swandale/rubocop-github-annotations-formatter/master/resources/example.png)
 
 ## Installation
 
@@ -20,7 +22,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Note: Rubocop must be executed inside [Github Actions](https://github.com/features/actions) for Annotations to work, using a 3rd party CI service like Travis-CI or CircleCI won't work.
+
+Append your `.rubocop.yml` file to load the formatter
+
+```yaml
+require:
+  - rubocop-github-annotation-formatter
+```
+
+The append your CI scripts to run rubocop:
+
+    bundle exec rubocop --format RubocopGithubAnnotationFormatter::AnnotationFormatter
+
+You can also have multiple different sets of output to maintain your current setup
+
+    bundle exec rubocop --format progress --format RubocopGithubAnnotationFormatter::AnnotationFormatter
 
 ## Development
 
