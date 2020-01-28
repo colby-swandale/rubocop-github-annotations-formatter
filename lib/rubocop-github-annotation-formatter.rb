@@ -5,7 +5,7 @@ require 'rubocop/formatter/base_formatter'
 
 module RubocopGithubAnnotationFormatter
   class AnnotationFormatter < RuboCop::Formatter::BaseFormatter
-    ANNOTATION_TEMPLATE = "\n::%<level>s file=%<file>s,line=%<line>d,col=%<col>d :: %<message>s\n"
+    ANNOTATION_TEMPLATE = "\n::error file=%<file>s,line=%<line>d,col=%<col>d :: %<message>s\n"
 
     def file_finished(file, offenses)
       return if offenses.empty?
@@ -13,21 +13,8 @@ module RubocopGithubAnnotationFormatter
       offenses.each do |offense|
         next if offense.corrected?
 
-        output.printf(ANNOTATION_TEMPLATE, level: level_for_offense(offense), file: file, 
-          line: offense.location.line, col: offense.location.begin_pos, message: offense.message)
-      end
-    end
-
-    def level_for_offense(offense)
-      case offense.severity.name
-      when :refactor, :convention
-        "info"
-      when :warning
-        "warning"
-      when :error, :fatal
-        "error"
-      else
-        raise "Cop severity not found : #{offense.severity.inspect}"
+        output.printf(ANNOTATION_TEMPLATE, file: file,  line: offense.location.line, col: offense.location.begin_pos,
+          message: offense.message)
       end
     end
   end
