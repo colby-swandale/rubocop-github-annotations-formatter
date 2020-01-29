@@ -9,7 +9,7 @@ This gem adds support for rendering Rubocop errors into Github Annotations.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rubocop-github-annotations-formatter'
+gem 'rubocop-github-annotations-formatter', require: false
 ```
 
 And then execute:
